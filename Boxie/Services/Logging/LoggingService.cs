@@ -2,17 +2,16 @@
 using Discord.Commands;
 using Discord.WebSocket;
 
-namespace Boxie.Services
+namespace Boxie.Services.Logging
 {
-    public class LoggingService
+    public class LoggingService : ILoggingService
     {
-        public LoggingService(DiscordSocketClient client, CommandService command)
+        public LoggingService(DiscordSocketClient client)
         {
             client.Log += LogAsync;
-            command.Log += LogAsync;
         }
 
-        private Task LogAsync(LogMessage msg)
+        public Task LogAsync(LogMessage msg)
         {
             if (msg.Exception is CommandException cmdException)
             {
@@ -22,6 +21,12 @@ namespace Boxie.Services
             }
 
             Console.WriteLine($"[General/{msg.Severity}] {msg}");
+            return Task.CompletedTask;
+        }
+
+        public Task LogAsync(string msg, LogLevel logLevel = LogLevel.Debug)
+        {
+            Console.WriteLine($"[General/{logLevel}] {msg}");
             return Task.CompletedTask;
         }
     }
