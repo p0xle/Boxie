@@ -1,3 +1,4 @@
 ﻿using Boxie;
 
-new BoxieCore().MainAsync();
+BoxieCore core = new();
+await core.MainAsync();
