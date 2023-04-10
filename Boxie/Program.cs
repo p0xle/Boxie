@@ -1,4 +1,5 @@
 ﻿using Boxie.Models;
+using Boxie.Modules.EpicFreeGames;
 using Boxie.Services.Logging;
 using Boxie.SlashCommands;
 using Boxie.SlashCommands.Extensions;
@@ -82,7 +83,8 @@ namespace Boxie
                 .AddSingleton(config)
                 .AddSingleton<SlashCommandStorage>()
                 .AddSlashCommandsBase()
-                .AddGlobalSlashCommands();
+                .AddGlobalSlashCommands()
+                .AddTransient<EpicFreeGamesModule>();
 
             return collection.BuildServiceProvider();
         }

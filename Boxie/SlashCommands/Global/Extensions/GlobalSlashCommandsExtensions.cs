@@ -8,8 +8,9 @@ namespace Boxie.SlashCommands.Global.Extensions
         public static IServiceCollection AddGlobalSlashCommands(this IServiceCollection serviceCollection)
         {
             serviceCollection
-                .AddScoped<TestSlashCommand>()
-                .AddScoped<IGlobalSlashCommandFactory, GlobalSlashCommandFactory>();
+                .AddScoped<IGlobalSlashCommandFactory, GlobalSlashCommandFactory>()
+                .AddScoped<EpicFreeGamesSlashCommand>()
+                .AddScoped<TestSlashCommand>();
 
             return serviceCollection;
         }
@@ -17,6 +18,7 @@ namespace Boxie.SlashCommands.Global.Extensions
         public static async Task CreateGlobalSlashCommands(this IServiceProvider serviceProvider)
         {
             await serviceProvider.GetRequiredService<TestSlashCommand>().CreateAsync();
+            await serviceProvider.GetRequiredService<EpicFreeGamesSlashCommand>().CreateAsync();
         }
     }
 }
