@@ -3,7 +3,7 @@ using Discord.WebSocket;
 
 namespace Boxie.SlashCommands.Global
 {
-    public class TestSlashCommand : SlashCommand
+    public class TestSlashCommand : GlobalSlashCommand
     {
         public TestSlashCommand(IServiceProvider serviceProvider, ILoggingService loggingService) : base(name, description, serviceProvider, loggingService)
         {

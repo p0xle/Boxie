@@ -3,9 +3,9 @@ using Boxie.Services.Logging;
 using Discord.WebSocket;
 using System.Text;
 
-namespace Boxie.SlashCommands.Global
+namespace Boxie.SlashCommands.Guild
 {
-    public class EpicFreeGamesSlashCommand : GlobalSlashCommand
+    public class EpicFreeGamesSlashCommand : GuildSlashCommand
     {
         private readonly EpicFreeGamesModule _freeGamesModule;
 

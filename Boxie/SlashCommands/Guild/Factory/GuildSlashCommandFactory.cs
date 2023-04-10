@@ -4,19 +4,21 @@ using Discord.Net;
 using Discord.WebSocket;
 using Newtonsoft.Json;
 
-namespace Boxie.SlashCommands.Global.Factory
+namespace Boxie.SlashCommands.Guild.Factory
 {
-    public class GlobalSlashCommandFactory : IGlobalSlashCommandFactory
+    public class GuildSlashCommandFactory : IGuildSlashCommandFactory
     {
         private readonly ILoggingService _loggingService;
         private readonly DiscordSocketClient _client;
         private readonly SlashCommandBuilder _builder;
+        private readonly SocketGuild _guild;
 
-        public GlobalSlashCommandFactory(ILoggingService loggingService, DiscordSocketClient client)
+        public GuildSlashCommandFactory(ILoggingService loggingService, DiscordSocketClient client)
         {
             _loggingService = loggingService;
             _client = client;
             _builder = new SlashCommandBuilder();
+            _guild = _client.GetGuild(1094627904824021054);
         }
 
         public async Task<bool> CreateAsync(string name, string description)
@@ -26,7 +28,7 @@ namespace Boxie.SlashCommands.Global.Factory
 
             try
             {
-                await _client.CreateGlobalApplicationCommandAsync(_builder.Build());
+                await _guild.CreateApplicationCommandAsync(_builder.Build());
                 return true;
             }
             catch (HttpException exception)

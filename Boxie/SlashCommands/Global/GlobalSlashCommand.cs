@@ -1,32 +1,16 @@
 ﻿using Boxie.Services.Logging;
 using Boxie.SlashCommands.Global.Factory;
-using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Boxie.SlashCommands
+namespace Boxie.SlashCommands.Global
 {
-    public abstract class SlashCommand
+    public abstract class GlobalSlashCommand : SlashCommandBase
     {
-        public string Name => _name.ToLower();
-        public string Description { get; }
-
-        protected readonly IServiceProvider _serviceProvider;
-        protected readonly ILoggingService _loggingService;
-
-        private readonly string _name;
-
-        public SlashCommand(string name, string description, IServiceProvider serviceProvider, ILoggingService loggingService)
+        public GlobalSlashCommand(string name, string description, IServiceProvider serviceProvider, ILoggingService loggingService) : base(name, description, serviceProvider, loggingService)
         {
-            _name = name;
-            Description = description;
-
-            _serviceProvider = serviceProvider;
-            _loggingService = loggingService;
         }
 
-        public abstract Task HandleAsync(SocketSlashCommand command);
-
-        public async Task CreateAsync()
+        public override async Task CreateAsync()
         {
             try
             {

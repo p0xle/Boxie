@@ -1,6 +1,6 @@
 ﻿namespace Boxie.SlashCommands
 {
-    public class SlashCommandStorage : List<SlashCommand>
+    public class SlashCommandStorage : List<SlashCommandBase>
     {
     }
 }
