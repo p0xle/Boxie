@@ -5,18 +5,20 @@ namespace Boxie.SlashCommands.Guild.Extensions
 {
     public static class GuildSlashCommandsExtensions
     {
-        public static IServiceCollection AddGlobalSlashCommands(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddGuildSlashCommands(this IServiceCollection serviceCollection)
         {
             serviceCollection
                 .AddScoped<IGuildSlashCommandFactory, GuildSlashCommandFactory>()
-                .AddScoped<EpicFreeGamesSlashCommand>();
+                .AddScoped<EpicFreeGamesSlashCommand>()
+                .AddScoped<ColinSlashCommand>();
 
             return serviceCollection;
         }
 
-        public static async Task CreateGlobalSlashCommands(this IServiceProvider serviceProvider)
+        public static async Task CreateGuildSlashCommands(this IServiceProvider serviceProvider)
         {
             await serviceProvider.GetRequiredService<EpicFreeGamesSlashCommand>().CreateAsync();
+            await serviceProvider.GetRequiredService<ColinSlashCommand>().CreateAsync();
         }
     }
 }

@@ -4,6 +4,7 @@ using Boxie.Services.Logging;
 using Boxie.SlashCommands;
 using Boxie.SlashCommands.Extensions;
 using Boxie.SlashCommands.Global.Extensions;
+using Boxie.SlashCommands.Guild.Extensions;
 using Boxie.SlashCommands.Handler;
 using Discord;
 using Discord.WebSocket;
@@ -67,6 +68,7 @@ namespace Boxie
         private async Task Client_Ready()
         {
             await _serviceProvider.CreateGlobalSlashCommands();
+            await _serviceProvider.CreateGuildSlashCommands();
         }
 
         private IServiceProvider CreateProvider(Config config)
@@ -84,6 +86,7 @@ namespace Boxie
                 .AddSingleton<SlashCommandStorage>()
                 .AddSlashCommandsBase()
                 .AddGlobalSlashCommands()
+                .AddGuildSlashCommands()
                 .AddTransient<EpicFreeGamesModule>();
 
             return collection.BuildServiceProvider();
