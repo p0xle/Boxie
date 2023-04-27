@@ -29,8 +29,8 @@
         public bool WillBeFree() => Promotions?.UpcomingPromotionalOffers?[0]?.PromotionalOffers?[0]?.DiscountSetting?.DiscountPercentage == 0;
         public bool InThisWeek()
         {
-            return Promotions?.PromotionalOffers?[0]?.PromotionalOffers?[0]?.StartDate < DateTime.Now.Date 
-                && Promotions?.PromotionalOffers?[0]?.PromotionalOffers?[0]?.EndDate > DateTime.Now.Date;
+            return Promotions?.PromotionalOffers?[0]?.PromotionalOffers?[0]?.StartDate < DateTime.Now 
+                && Promotions?.PromotionalOffers?[0]?.PromotionalOffers?[0]?.EndDate > DateTime.Now;
         }
         public bool InNextWeek()
         {

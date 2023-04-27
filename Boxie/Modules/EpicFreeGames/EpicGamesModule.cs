@@ -18,8 +18,8 @@ namespace Boxie.Modules.EpicFreeGames
 
         public async Task<List<EpicOfferGame>> GetGamesAsync()
         {
-            using RestClient? client = new RestClient(_restClientOptions);
-            RestRequest request = new RestRequest("/freeGamesPromotions?country=DE&locale=de", Method.Get);
+            using RestClient? client = new(_restClientOptions);
+            RestRequest request = new("/freeGamesPromotions?country=DE&locale=de", Method.Get);
             request.AddHeader("Access-Control-Allow-Origin", "*");
             
             RestResponse response = await client.ExecuteAsync(request);
@@ -32,7 +32,7 @@ namespace Boxie.Modules.EpicFreeGames
 
             EpicResponse data = JsonConvert.DeserializeObject<EpicResponse>(response.Content) ?? new EpicResponse();
 
-            return data?.Data?.Catalog?.SearchStore?.Elements ?? new List<EpicOfferGame>();
+            return data.Data?.Catalog?.SearchStore?.Elements ?? new List<EpicOfferGame>();
         }
     }
 }
