@@ -10,7 +10,8 @@ namespace Boxie.SlashCommands.Guild.Extensions
             serviceCollection
                 .AddScoped<IGuildSlashCommandFactory, GuildSlashCommandFactory>()
                 .AddScoped<EpicFreeGamesSlashCommand>()
-                .AddScoped<ColinSlashCommand>();
+                .AddScoped<ColinSlashCommand>()
+                .AddScoped<DemoSlashCommand>();
 
             return serviceCollection;
         }
@@ -19,6 +20,7 @@ namespace Boxie.SlashCommands.Guild.Extensions
         {
             await serviceProvider.GetRequiredService<EpicFreeGamesSlashCommand>().CreateAsync();
             await serviceProvider.GetRequiredService<ColinSlashCommand>().CreateAsync();
+            await serviceProvider.GetRequiredService<DemoSlashCommand>().CreateAsync();
         }
     }
 }
