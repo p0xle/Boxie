@@ -1,4 +1,6 @@
 ﻿{
   "Token": "",
-  "GuildId": 0
+  "GuildId": 0,
+  "DeleteGlobalCommandsOnStartup": false,
+  "DeleteGuildCommandsOnStartup":  false
 }

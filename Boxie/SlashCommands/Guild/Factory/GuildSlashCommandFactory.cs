@@ -21,7 +21,7 @@ namespace Boxie.SlashCommands.Guild.Factory
             _client = client;
             _builder = new SlashCommandBuilder();
             _config = config;
-            _guild = _client.GetGuild(config.GuildId ?? 0);
+            _guild = _client.GetGuild(config.GuildId);
         }
 
         public async Task<bool> CreateAsync(string name, string description)

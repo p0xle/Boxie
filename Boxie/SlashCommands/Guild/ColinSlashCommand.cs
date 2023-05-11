@@ -5,7 +5,7 @@ namespace Boxie.SlashCommands.Guild
 {
     public class ColinSlashCommand : GuildSlashCommand
     {
-        public ColinSlashCommand(IServiceProvider serviceProvider, ILoggingService loggingService) : base("Colin", "Ich bin Colin", serviceProvider, loggingService)
+        public ColinSlashCommand(IServiceProvider serviceProvider, ILoggingService loggingService) : base("Colin", "Ich bin Colin", serviceProvider, loggingService, isDisabled: true)
         {
         }
 

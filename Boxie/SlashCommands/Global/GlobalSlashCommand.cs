@@ -6,12 +6,18 @@ namespace Boxie.SlashCommands.Global
 {
     public abstract class GlobalSlashCommand : SlashCommandBase
     {
-        public GlobalSlashCommand(string name, string description, IServiceProvider serviceProvider, ILoggingService loggingService) : base(name, description, serviceProvider, loggingService)
+        public GlobalSlashCommand(string name, string description, IServiceProvider serviceProvider, ILoggingService loggingService, bool isEnabled = true) : base(name, description, isEnabled, serviceProvider, loggingService)
         {
         }
 
         public override async Task CreateAsync()
         {
+            // Don't create disabled SlashCommands
+            if (IsDisabled)
+            {
+                return;
+            }
+
             try
             {
                 IGlobalSlashCommandFactory testCommandFactory = _serviceProvider.GetRequiredService<IGlobalSlashCommandFactory>();

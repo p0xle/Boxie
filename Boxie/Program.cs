@@ -59,6 +59,7 @@ namespace Boxie
             ISlashCommandHandler slashCommandHandler = _serviceProvider.GetRequiredService<ISlashCommandHandler>();
             _client.SlashCommandExecuted += slashCommandHandler.Handle;
 
+            await _loggingService.LogAsync("Executing Login as Bot");
             await _client.LoginAsync(TokenType.Bot, _config.Token);
             await _client.StartAsync();
 
@@ -67,8 +68,43 @@ namespace Boxie
 
         private async Task Client_Ready()
         {
+            await DeleteGlobalCommands();
+            await DeleteGuildCommands();
+
             await _serviceProvider.CreateGlobalSlashCommands();
             await _serviceProvider.CreateGuildSlashCommands();
+        }
+
+        private async Task DeleteGlobalCommands()
+        {
+            if (!_config.DeleteGlobalCommandsOnStartup)
+            {
+                return;
+            }
+
+            IReadOnlyCollection<SocketApplicationCommand> commands =
+                await _client.GetGlobalApplicationCommandsAsync();
+
+            foreach (SocketApplicationCommand command in commands)
+            {
+                await command.DeleteAsync();
+            }
+        }
+
+        private async Task DeleteGuildCommands()
+        {
+            if (_config.GuildId is 0 || !_config.DeleteGuildCommandsOnStartup)
+            {
+                return;
+            }
+
+            IReadOnlyCollection<SocketApplicationCommand> commands = 
+                await _client.GetGuild(_config.GuildId).GetApplicationCommandsAsync();
+
+            foreach (SocketApplicationCommand command in commands)
+            {
+                await command.DeleteAsync();
+            }
         }
 
         private IServiceProvider CreateProvider(Config config)

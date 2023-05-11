@@ -15,10 +15,13 @@ namespace Boxie.SlashCommands.Handler
         public async Task Handle(SocketSlashCommand command)
         {
             SlashCommandBase? slashCommand = _slashCommands.Find(f => f.Name.Equals(command.Data.Name));
-            if (slashCommand is not null)
+            if (slashCommand is null)
             {
-                await slashCommand.HandleAsync(command);
+                await command.RespondAsync("This command is currently not available. Please try again later..", ephemeral: true);
+                return;
             }
+
+            await slashCommand.HandleAsync(command);
         }
     }
 }

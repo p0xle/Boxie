@@ -11,7 +11,7 @@ namespace Boxie.SlashCommands.Guild
     {
         private readonly EpicFreeGamesModule _freeGamesModule;
 
-        public EpicFreeGamesSlashCommand(IServiceProvider serviceProvider, ILoggingService loggingService, EpicFreeGamesModule freeGamesModule) : base("Free-Epic-Games", "Gibt die aktuellen und zukünftigen Gratis Spiele im Epic Games Launcher zurück.", serviceProvider, loggingService)
+        public EpicFreeGamesSlashCommand(IServiceProvider serviceProvider, ILoggingService loggingService, EpicFreeGamesModule freeGamesModule) : base("Free-Epic-Games", "Gibt die aktuellen und zukünftigen Gratis Spiele im Epic Games Launcher zurück.", serviceProvider, loggingService, isDisabled: true)
         {
             _freeGamesModule = freeGamesModule;
         }
