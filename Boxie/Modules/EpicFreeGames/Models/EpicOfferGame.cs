@@ -7,8 +7,8 @@
         public string? Namespace { get; set; }
         public string? Description { get; set; }
         public string? EffectiveDate { get; set; }
-        public string? OfferType { get; set; }
-        public bool? ExpiryDate { get; set; }
+        public EpicOfferType OfferType { get; set; }
+        public DateTime? ExpiryDate { get; set; }
         public string? Status { get; set; }
         public bool? IsCodeRedemptionOnly { get; set; }
         public List<EpicKeyImage> KeyImages { get; set; } = new();
@@ -22,7 +22,6 @@
         public EpicPrice? Price { get; set; }
         public EpicPromotions Promotions { get; set; } = new();
 
-        public bool IsBaseGame(bool includeAll = false) => includeAll || OfferType == "BASE_GAME";
         public bool HasPromotionalOffers() => Promotions?.PromotionalOffers?.Count != 0;
         public bool HasUpcomingPromotionalOffers() => Promotions?.UpcomingPromotionalOffers?.Count != 0;
         public bool IsFree() => Price?.TotalPrice?.DiscountPrice == 0;

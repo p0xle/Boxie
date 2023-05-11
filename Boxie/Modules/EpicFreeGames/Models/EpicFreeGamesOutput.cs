@@ -2,7 +2,7 @@
 {
     public class EpicFreeGamesOutput
     {
-        public List<EpicOfferGame> CurrentGames { get; set; } = new();
-        public List<EpicOfferGame> NextGames { get; set; } = new();
+        public List<EpicOfferGame> Current { get; set; } = new();
+        public List<EpicOfferGame> Next { get; set; } = new();
     }
 }

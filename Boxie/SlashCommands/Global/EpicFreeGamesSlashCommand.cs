@@ -1,4 +1,6 @@
 ﻿using Boxie.Modules.EpicFreeGames;
+using Boxie.Modules.EpicFreeGames.Models;
+using Boxie.Modules.EpicFreeGames.Models.Extensions;
 using Boxie.Services.Logging;
 using Discord.WebSocket;
 using System.Text;
@@ -19,23 +21,34 @@ namespace Boxie.SlashCommands.Global
             try
             {
                 var data = await _freeGamesModule.GetGamesAsync();
-                if (data is null || data.CurrentGames.Count == 0)
+                if (data is null || data.Current.Count == 0)
                 {
                     await command.RespondAsync("Die aktuellen Gratis Spiele konnten nicht geladen werden", ephemeral: true);
                     return;
                 }
 
                 StringBuilder builder = new();
-                builder.AppendLine("Aktuelle Gratis Spiele:");
-                foreach (var current in data.CurrentGames)
+                builder.AppendLine("Gratis Epic Games Spiele");
+                builder.AppendLine("Diese Woche:");
+                foreach (var current in data.Current)
                 {
-                    builder.AppendLine(current.Title);
+                    builder.Append(current.Title);
+                    if (current.OfferType is EpicOfferType.DLC)
+                    {
+                        builder.Append($" ({current.OfferType.ToFriendlyString()})");
+                    }
+                    builder.AppendLine();
                 }
                 builder.AppendLine();
-                builder.AppendLine("Zukünftige Gratis Spiele:");
-                foreach (var next in data.NextGames)
+                builder.AppendLine("Nächste Woche:");
+                foreach (var next in data.Next)
                 {
-                    builder.AppendLine(next.Title);
+                    builder.Append(next.Title);
+                    if (next.OfferType is EpicOfferType.DLC)
+                    {
+                        builder.Append($" ({next.OfferType})");
+                    }
+                    builder.AppendLine();
                 }
 
                 await command.RespondAsync(builder.ToString());
