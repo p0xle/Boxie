@@ -6,7 +6,7 @@ namespace Boxie.SlashCommands.Global
 {
     public abstract class GlobalSlashCommand : SlashCommandBase
     {
-        public GlobalSlashCommand(string name, string description, IServiceProvider serviceProvider, ILoggingService loggingService, bool isEnabled = true) : base(name, description, isEnabled, serviceProvider, loggingService)
+        public GlobalSlashCommand(string name, string description, IServiceProvider serviceProvider, ILoggingService loggingService, bool isDisabled = false) : base(name, description, isDisabled, serviceProvider, loggingService)
         {
         }
 
