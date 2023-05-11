@@ -56,9 +56,6 @@ namespace Boxie
         {
             _client.Ready += Client_Ready;
 
-            ISlashCommandHandler slashCommandHandler = _serviceProvider.GetRequiredService<ISlashCommandHandler>();
-            _client.SlashCommandExecuted += slashCommandHandler.Handle;
-
             await _loggingService.LogAsync("Executing Login as Bot");
             await _client.LoginAsync(TokenType.Bot, _config.Token);
             await _client.StartAsync();
@@ -73,6 +70,9 @@ namespace Boxie
 
             await _serviceProvider.CreateGlobalSlashCommands();
             await _serviceProvider.CreateGuildSlashCommands();
+
+            ISlashCommandHandler slashCommandHandler = _serviceProvider.GetRequiredService<ISlashCommandHandler>();
+            _client.SlashCommandExecuted += slashCommandHandler.Handle;
         }
 
         private async Task DeleteGlobalCommands()
