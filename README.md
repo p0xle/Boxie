@@ -18,3 +18,6 @@ You can disable certain Slash Commands by passing in `isDisabled: true` into the
 
 Currently implemented functioning Global Commands
 - /free-epic-games (Returning free games for this and the upcoming week. currently in german with no language support)
+
+Todos:
+- Writing Tests
