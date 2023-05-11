@@ -14,7 +14,7 @@ You can get that ID by enabling Developer Mode in the Advanced Discord Settings,
 If you want to delete all Global or Guild Slash Commands on Startup you can do that by setting the corresponding field in the config.
 
 You can disable certain Slash Commands by passing in `isDisabled: true` into the base constructor.\
-❗Keep in mind that if that users can still see the command, if it was previously registered❗
+❗Keep in mind that if users can still see the command, if it was previously registered❗
 
 Currently implemented functioning Global Commands
 - /free-epic-games (Returning free games for this and the upcoming week. currently in german with no language support)
