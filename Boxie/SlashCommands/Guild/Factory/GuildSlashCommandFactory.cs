@@ -1,4 +1,5 @@
-﻿using Boxie.Services.Logging;
+﻿using Boxie.Models;
+using Boxie.Services.Logging;
 using Discord;
 using Discord.Net;
 using Discord.WebSocket;
@@ -12,17 +13,24 @@ namespace Boxie.SlashCommands.Guild.Factory
         private readonly DiscordSocketClient _client;
         private readonly SlashCommandBuilder _builder;
         private readonly SocketGuild _guild;
+        private readonly Config _config;
 
-        public GuildSlashCommandFactory(ILoggingService loggingService, DiscordSocketClient client)
+        public GuildSlashCommandFactory(ILoggingService loggingService, DiscordSocketClient client, Config config)
         {
             _loggingService = loggingService;
             _client = client;
             _builder = new SlashCommandBuilder();
-            _guild = _client.GetGuild(1094627904824021054);
+            _config = config;
+            _guild = _client.GetGuild(config.GuildId ?? 0);
         }
 
         public async Task<bool> CreateAsync(string name, string description)
         {
+            if (_config.GuildId is 0)
+            {
+                return false;
+            }
+
             _builder.WithName(name.ToLower());
             _builder.WithDescription(description);
 
