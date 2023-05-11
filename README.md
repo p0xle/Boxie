@@ -15,3 +15,6 @@ If you want to delete all Global or Guild Slash Commands on Startup you can do t
 
 You can disable certain Slash Commands by passing in `isDisabled: true` into the base constructor.\
 ❗Keep in mind that if that users can still see the command, if it was previously registered❗
+
+Currently implemented functioning Global Commands
+- /free-epic-games (Returning free games for this and the upcoming week. currently in german with no language support)
