@@ -1,6 +1,6 @@
 # Boxie
 
-Discord Bot using the Discord.Net Framework
+Discord Bot using the [Discord.Net Framework](https://discordnet.dev/)
 
 Setup:
 - Create a copy of the template.config.json file and name it 'config.json'
