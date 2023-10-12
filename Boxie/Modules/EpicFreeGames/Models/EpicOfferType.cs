@@ -4,6 +4,7 @@
     {
         BASE_GAME,
         DLC,
+        BUNDLE,
         OTHERS
     }
 }
