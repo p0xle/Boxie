@@ -111,7 +111,7 @@ namespace Boxie
         {
             var discordSocketConfig = new DiscordSocketConfig()
             {
-                
+                UseInteractionSnowflakeDate = false
             };
 
             var collection = new ServiceCollection()
